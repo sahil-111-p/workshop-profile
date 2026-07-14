@@ -112,3 +112,26 @@ img {
 
 
 }
+
+.btn {
+    /* width: 160px; */
+    /* height: 125px; */
+    position: absolute;
+    top: 664px;
+    left: 50%;
+
+    bottom: 0;
+    font-size: large;
+    font-weight: 600;
+    transform: translateX(-50%);
+}
+
+.btn button {
+    background: #ff8a34;
+    color: #fff;
+    font-size: 28px;
+    font-weight: 600;
+    padding: 18px 45px;
+    border: 6px solid #2d2d2d;
+    border-radius: 50px;
+}
