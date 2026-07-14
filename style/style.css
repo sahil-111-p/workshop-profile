@@ -1,0 +1,82 @@
+@font-face {
+    font-family: "lufga";
+    src: url("../assets/Lufga-Regular.otf") format("opentype");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: lufga;
+}
+
+nav {
+    margin: 30px 80px;
+    color: white;
+    background: #000;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 500px;
+    width: calc(100% - 160px);
+    position: fixed;
+    font-size: 20px;
+}
+
+.nav-s {
+    background: #FD853A;
+}
+
+li {
+    border-radius: 500px;
+    list-style: none;
+    padding: 20px 40px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+
+img {
+    height: 25px;
+    width: 25px;
+    padding-right: 5px;
+    /* background: #000; */
+}
+
+.sahil {
+    width: 800px;
+    /* or any width */
+    /* background: red; */
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 96px;
+    font-weight: 900;
+}
+
+.sahil span {
+    color: #FD853A;
+}
+
+.parth {
+    position: absolute;
+    bottom: 0px;
+    height: 60%;
+    width: 40%;
+    background: aqua;
+    background-image: url(../assets/Image.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+
+
+}
+
+.parth img {
+    height: 60%;
+}
