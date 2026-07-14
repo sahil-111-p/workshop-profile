@@ -67,16 +67,48 @@ img {
 .parth {
     position: absolute;
     bottom: 0px;
+
     height: 60%;
-    width: 40%;
-    background: aqua;
-    background-image: url(../assets/Image.png);
+    width: 100%;
+    /* background: aqua; */
+    background: url("../assets/Image.png") no-repeat center bottom;
     background-size: contain;
     background-repeat: no-repeat;
+
+
+    transform: translateX(-50%);
+    left: 50%;
 
 
 }
 
 .parth img {
     height: 60%;
+    width: 100%;
+}
+
+.lines {
+    position: absolute;
+    top: 500px;
+    left: 7%;
+    font-size: large;
+    font-weight: 600;
+}
+
+.lines img {
+    width: 37px;
+    height: 35px;
+}
+
+.stars img {
+    width: 160px;
+    height: 125px;
+    position: absolute;
+    top: 500px;
+    left: 80%;
+    font-size: large;
+    font-weight: 600;
+
+
+
 }
