@@ -262,3 +262,17 @@ nav img {
     padding: 20px 40px;
     border-radius: 60px;
 }
+
+.certify {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: antiquewhite;
+    padding: 3px;
+}
+
+.certify img {
+    display: inline;
+    justify-content: center;
+    /* align-items: center; */
+}
