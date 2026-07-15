@@ -6,6 +6,7 @@
 * {
     margin: 0;
     padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -13,19 +14,20 @@ body {
 }
 
 nav {
-    margin: 30px 80px;
+    margin: 30px 170px;
     color: white;
     background: #000;
     display: flex;
     justify-content: space-between;
     border-radius: 500px;
-    width: calc(100% - 160px);
+    width: calc(100% - 340px);
     position: fixed;
     font-size: 20px;
+    z-index: 10;
 }
 
 .nav-s {
-    background: #FD853A;
+    background: #fd853a;
 }
 
 li {
@@ -38,14 +40,19 @@ li {
     font-size: 20px;
 }
 
-img {
+nav img {
     height: 25px;
     width: 25px;
     padding-right: 5px;
     /* background: #000; */
 }
-
-.sahil {
+.hero{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+.name {
     width: 800px;
     /* or any width */
     /* background: red; */
@@ -60,67 +67,98 @@ img {
     font-weight: 900;
 }
 
-.sahil span {
-    color: #FD853A;
+.name span {
+    color: #fd853a;
 }
 
-.parth {
+.image {
     position: absolute;
     bottom: 0px;
 
-    height: 60%;
+    height: 70%;
     width: 100%;
     /* background: aqua; */
-    background: url("../assets/Image.png") no-repeat center bottom;
+    background: url("../assets//images/hero.png") no-repeat center bottom;
     background-size: contain;
     background-repeat: no-repeat;
-
-
     transform: translateX(-50%);
     left: 50%;
-
-
+}
+.circle {
+    position: absolute;
+    background-color: rgb(253, 133, 58, 0.7);
+    bottom: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 80vh;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    z-index: -1;
 }
 
-.parth img {
+.decor1{
+    position: absolute;
+    height: 30px;
+    aspect-ratio: 1/1;
+    top: 14%;
+    left: 52.5%;
+}
+.decor2{
+    position: absolute;
+    height: 70px;
+    aspect-ratio: 1/1;
+    top: 49%;
+    left: 28%;
+    rotate: 180deg;
+}
+.decor1 img, .decor2 img{
+    height: 100%;
+    width: 100%;
+}
+
+.image img {
     height: 60%;
     width: 100%;
 }
 
-.lines {
+.intro {
     position: absolute;
     top: 500px;
-    left: 7%;
+    left: 10%;
     font-size: large;
     font-weight: 600;
 }
 
-.lines img {
+.intro img {
     width: 37px;
     height: 35px;
 }
-
-.stars img {
-    width: 160px;
-    height: 125px;
+.rate {
     position: absolute;
+    top: 500px;
+    left: 80%;
+}
+.rate h2 {
+    font-size: 40px;
+    font-weight: 600;
+}
+.rate p {
+    font-size: 17px;
+}
+.stars {
+    width: 26px;
+    height: 25px;
     top: 500px;
     left: 80%;
     font-size: large;
     font-weight: 600;
-
-
-
+    display: flex;
 }
 
 .btn {
-    /* width: 160px; */
-    /* height: 125px; */
     position: absolute;
-    top: 664px;
+    bottom: 64px;
     left: 50%;
-
-    bottom: 0;
     font-size: large;
     font-weight: 600;
     transform: translateX(-50%);
@@ -132,6 +170,12 @@ img {
     font-size: 28px;
     font-weight: 600;
     padding: 18px 45px;
-    border: 6px solid #2d2d2d;
+    border: 6px solid rgb(45, 45, 45, 0.9);
     border-radius: 50px;
+    display: flex;
+    align-items: center;
+}
+.btn img {
+    height: 45px;
+    width: 45px;
 }
