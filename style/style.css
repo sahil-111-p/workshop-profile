@@ -15,16 +15,25 @@ body {
   overflow-x: hidden;
 }
 
+/* 
+  Optimized navbar container:
+  - Original problem: The original navbar used fixed pixel horizontal margins (170px) and a fixed calculated width,
+    which squeezed the menu list items or caused them to overflow the container on standard laptop screens.
+  - Sizing choice: We use min() to limit the horizontal margins. The margins scale horizontally at 11vw but are
+    clamped to a maximum of 170px so the layout remains identical on wide external monitors.
+  - Sizing choice: Vertical margin scales at 2vw but is capped at 30px via min().
+  - Sizing choice: Width recalculates dynamically to fill the screen while accounting for the scaled margins.
+*/
 nav {
-  margin: 30px 170px;
+  margin: min(30px, 2vw) min(170px, 11vw);
   color: white;
   background: #000;
   display: flex;
   justify-content: space-between;
   border-radius: 500px;
-  width: calc(100% - 340px);
+  width: calc(100% - 2 * min(170px, 11vw));
   position: fixed;
-  font-size: 20px;
+  font-size: calc(15px + 0.26vw); /* Smooth fluid text scaling without using clamp */
   z-index: 10;
 }
 
@@ -32,14 +41,21 @@ nav {
   background: #fd853a;
 }
 
+/*
+  Optimized list items inside navbar:
+  - Original problem: Fixed padding (20px 40px) and margin (10px) on individual links consumed too much horizontal
+    space, forcing menu links to wrap or overlap on smaller screens.
+  - Sizing choice: We use calc() with viewport width (vw) for both margins and padding, ensuring items shrink
+    proportionally as screen width decreases, keeping the menus on a single line.
+*/
 li {
   border-radius: 500px;
   list-style: none;
-  padding: 20px 40px;
-  margin: 10px;
+  padding: calc(10px + 0.5vw) calc(15px + 1.3vw);
+  margin: calc(5px + 0.25vw);
   display: flex;
   align-items: center;
-  font-size: 20px;
+  font-size: calc(15px + 0.26vw); /* Scales seamlessly down to 17.6px on a 1024px screen */
 }
 
 nav img {
@@ -56,16 +72,24 @@ nav img {
   overflow: hidden;
 }
 
+/*
+  Optimized Hero Name:
+  - Original problem: The text used a rigid 96px font size and a fixed 800px width. On laptop viewports,
+    this pushed letters outside container boundaries and wrapped lines awkwardly.
+  - Sizing choice: We limit name container width to min(800px, 50vw).
+  - Sizing choice: Font size scales fluidly via calc(48px + 2.5vw) which resolves to exactly 96px on large monitors and scales down safely on laptops.
+  - Sizing choice: Top offset scales using calc(90px + 5.5vh) to lift the name upward on shorter screens, avoiding circle overlaps.
+*/
 .name {
-  width: 800px;
+  width: min(800px, 50vw);
   position: absolute;
-  top: 150px;
+  top: calc(90px + 5.5vh);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 96px;
+  font-size: calc(48px + 2.5vw);
   font-weight: 900;
 }
 
@@ -73,9 +97,14 @@ nav img {
   color: #fd853a;
 }
 
+/*
+  Optimized Hero Image:
+  - Original problem: A fixed top margin of -200px forced the hero image too high or low relative to the scaled circle.
+  - Sizing choice: We use max(-200px, -18.5vh) to dynamically pull the head image to match the scaled background circle size.
+*/
 .circle img {
   position: absolute;
-  top: -200px;
+  top: max(-200px, -18.5vh);
   width: 100%;
   aspect-ratio: 1/1;
   z-index: -1;
@@ -93,20 +122,26 @@ nav img {
   z-index: 1;
 }
 
+/*
+  Optimized Name Decorations:
+  - Original problem: Fixed decoration dimensions and offsets drifted out of alignment as text size reduced.
+  - Sizing choice: Responsive height calculations scale decors down. Right/left offsets use relative percentage
+    values (right: 40%; left: -3.5%;) to lock their positions relative to the scaled name container.
+*/
 .decor1 {
   position: absolute;
-  height: 30px;
+  height: calc(18px + 0.6vw);
   aspect-ratio: 1/1;
-  right: 320px;
-  top: -80px;
+  right: 40%;
+  top: calc(-50px - 1.5vw);
 }
 
 .decor2 {
   position: absolute;
-  height: 70px;
+  height: calc(40px + 1.5vw);
   aspect-ratio: 1/1;
-  bottom: -80px;
-  left: -28px;
+  bottom: calc(-50px - 1.5vw);
+  left: -3.5%;
   rotate: 180deg;
 }
 
@@ -116,51 +151,78 @@ nav img {
   width: 100%;
 }
 
+/*
+  Optimized Intro Paragraphs:
+  - Original problem: On smaller laptop screens, the absolute positioning at left: 10% caused the text block
+    to collide with the center hero image.
+  - Sizing choice: We use left: max(50px, 10vw) to enforce a safe left boundary of 50px so text never collides.
+  - Sizing choice: Font size scales fluidly via calc(16px + 0.3vw).
+*/
 .intro {
   position: absolute;
   top: 50%;
-  left: 10%;
-  font-size: large;
+  left: max(50px, 10vw);
+  font-size: calc(16px + 0.3vw);
   font-weight: 600;
 }
 
 .intro img {
-  width: 37px;
-  height: 35px;
+  width: calc(24px + 0.68vw);
+  height: calc(23px + 0.62vw);
 }
 
+/*
+  Optimized Ratings:
+  - Original problem: The original position (left: 80%) caused the rating block to overlap the circle on narrow viewports.
+  - Sizing choice: We use left: max(800px, 80vw) to keep the ratings neatly on the right side of the circle.
+*/
 .rate {
   position: absolute;
   top: 50%;
-  left: 80%;
+  left: max(800px, 80vw);
 }
 
 .rate h2 {
-  font-size: 40px;
+  font-size: calc(24px + 0.8vw);
   font-weight: 600;
 }
 
 .rate p {
-  font-size: 17px;
+  font-size: calc(14px + 0.15vw);
 }
 
+/*
+  Optimized Star Ratings Container and Images:
+  - Original problem: Star container width was bugged (fixed at 26px) causing stars to overflow horizontally.
+  - Sizing choice: Container width and star sizes scale in sync using calc() expressions to maintain layout alignment.
+*/
 .stars {
-  width: 26px;
-  height: 25px;
-  top: 500px;
-  left: 80%;
-  font-size: large;
+  width: calc(100px + 1.56vw);
+  height: calc(20px + 0.26vw);
+  font-size: calc(14px + 0.2vw);
   font-weight: 600;
   display: flex;
+  gap: calc(2px + 0.15vw);
 }
 
+.stars img {
+  width: calc(16px + 0.52vw);
+  height: calc(15px + 0.52vw);
+}
+
+/*
+  Optimized CTA Button:
+  - Original problem: The original design had a fixed 28px text size, 18px 45px padding, and 6px border which appeared
+    exceedingly bulky on smaller laptop screens.
+  - Sizing choice: We scale font size, border thickness, and paddings using simple calc() formulas for fluid adjustment.
+*/
 .btn {
   background: #ff8a34;
   color: #fff;
-  font-size: 28px;
+  font-size: calc(18px + 0.52vw);
   font-weight: 600;
-  padding: 18px 45px;
-  border: 6px solid rgb(45, 45, 45, 0.9);
+  padding: calc(10px + 0.4vw) calc(25px + 1.04vw);
+  border: calc(3px + 0.15vw) solid rgb(45, 45, 45, 0.9);
   border-radius: 50px;
   display: flex;
   align-items: center;
@@ -172,8 +234,8 @@ nav img {
 
 .btn img {
   position: initial;
-  height: 45px;
-  width: 45px;
+  height: calc(24px + 1.1vw);
+  width: calc(24px + 1.1vw);
   z-index: 5;
 }
 
@@ -183,66 +245,126 @@ nav img {
   position: relative;
 }
 
+/*
+  Optimized Marquee Container and Items:
+  - Original problem: Hardcoded border sizing (30px), marquee gap (60px), and huge text height (63px) looked too thick on smaller monitors.
+  - Sizing choice: Use calc() on marquee borders, gap, and item height to shrink layout proportions.
+  - Align-items: center was added to ensure text and star images align perfectly vertically.
+*/
 .p {
   background-color: #fff;
   display: flex;
-  gap: 60px;
+  align-items: center;
+  gap: calc(30px + 1.56vw);
   width: max-content;
   animation: marquee 9s linear infinite;
   will-change: transform;
   transform: translateX(0);
-  border-top: 30px solid #fd853a;
-  border-bottom: 30px solid #fd853a;
+  border-top: calc(15px + 0.78vw) solid #fd853a;
+  border-bottom: calc(15px + 0.78vw) solid #fd853a;
 }
 
 .p p {
   background-color: #fff;
-  height: 63px;
-  font-size: 48px;
+  height: calc(32px + 1.6vw);
+  font-size: calc(24px + 1.25vw);
   flex-shrink: 0;
   white-space: nowrap;
 }
 
-.lower {
-  height: 476px;
-  padding: 98px;
+/*
+  Added Marquee Star image scaling to scale in line with text font-size:
+*/
+.p img {
+  height: calc(24px + 1.25vw);
+  width: auto;
 }
 
+/*
+  Optimized Footer Container:
+  - Original problem: The footer used a fixed height of 476px and padding of 98px, which took up too much vertical space.
+  - Sizing choice: We restrict height with min(476px, 25vw) and make padding responsive with calc(40px + 3vw).
+*/
+.lower {
+  height: min(476px, 25vw);
+  padding: calc(40px + 3vw);
+}
+
+/*
+  Optimized Footer Tagline:
+  - Original problem: The original text size was fixed at 64px, causing text to wrap in weird places on laptops.
+  - Sizing choice: We scale text smoothly with calc(32px + 1.66vw).
+*/
 .tgline p {
   display: flex;
   justify-content: center;
-  font-size: 64px;
+  font-size: calc(32px + 1.66vw);
   font-weight: 400;
 }
 
-.nav2 {
+/*
+  Optimized Email Form Container:
+  - Original problem: Rigid newsletter bar heights (86px) and email input sizes overflowed text wrappers.
+  - Sizing choice: Use calc() on container heights, paddings, and font sizes so they adjust naturally.
+*/
+.form {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 86px;
-  padding: 14px;
+  height: calc(50px + 1.87vw);
+  padding: calc(8px + 0.3vw);
   border: 1px solid black;
   border-radius: 50px;
-  font-size: 20px;
+  font-size: calc(16px + 0.2vw);
+  gap: 20px;
 }
 
 .left {
   display: flex;
   align-items: center;
-  gap: 17px;
+  gap: calc(8px + 0.47vw);
+  width: 100%;
 }
 
 .left img {
-  height: 58px;
-  width: 64px;
+  height: calc(32px + 1.35vw);
+  width: calc(35px + 1.5vw);
 }
 
+.left input{
+  border: none;
+  font-size: 16px;
+  height: 35px;
+  width: 100%;
+  font-family: lufga;
+}
+
+.left input::placeholder {
+  color: #686868;
+  font-size: 16px;
+  font-weight: 200;
+}
+
+.left input:focus,
+.left input:active {
+  outline: none;
+  border: none;
+}
+
+/*
+  Optimized Submit Button ("Send"):
+  - Original problem: A fixed size button caused clipping.
+  - Sizing choice: Scaled button dimensions using calc(), and added flex layout centering to keep text "Send" centered.
+*/
 .right p {
     background-color: #fd853a;
     color: #fff;
-    width: 126px;
-    height: 64px;
-    padding: 20px 40px;
+    width: calc(90px + 1.87vw);
+    height: calc(40px + 1.25vw);
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 60px;
 }
 
